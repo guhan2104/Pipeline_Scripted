@@ -1,0 +1,45 @@
+properties([
+    
+    parameters([
+        choice(choices: ['IL', 'CA'].join("\n"), description: 'select state', name: 'state')
+        ])
+        
+        ])
+
+if(state=='IL')
+{
+    j_node = 'master'
+    
+}
+else
+
+{
+    
+    j_node = 'w4'
+}
+node(j_node){
+    
+    stage('Build and Package')
+    {
+        echo 'Creating War file'
+        powershell 'date'
+        powershell 'mvn --version'
+        sleep 4
+        echo "Choice: ${params.state}"
+
+
+    }
+    
+    stage('Deploy to QA')
+    {
+        
+        echo 'Deploy to Stage'
+        
+    }
+    
+    stage('Deploy to Prod')
+    
+    echo 'Deploy to Prod'
+    
+    
+}
